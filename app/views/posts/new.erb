@@ -1,18 +1,29 @@
 <h1>New Post</h1>
 
-<%= form_with model: @post, method: :post do |form| %>
-  <div>
-    <%= form.label :post_name %>
-    <%= form.text_field :post_name %>
-  </div>
+<div class="mb-3 w-50">
+  <%= form_with class: "row g-3", model: @post, method: :post do |form| %>
+    <div>
+      <%= form.label :post_name, "Post Title", class: "form-label" %>
+      <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title" %>
+      <% @post.errors.full_messages_for(:post_name).each do |msg| %>
+        <p class="text-danger pt-2">
+          <%= msg %>
+        </p>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.label :post_body %>
-    <%= form.text_area :post_body %>
-  </div>
+    <div>
+      <%= form.label :post_body, "Post Description", class: "form-label" %>
+      <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text", style: "height: 120px; resize: none;" %>
+      <% @post.errors.full_messages_for(:post_body).each do |msg| %>
+        <p class="text-danger pt-2" ><%= msg %></p>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.submit "Submit" %>
-  </div>
+    <div>
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>
+
