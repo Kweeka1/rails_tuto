@@ -1,0 +1,18 @@
+<h1>Show all posts</h1>
+
+<ul>
+  <% @posts.each do |post| %>
+  <li>
+    <h4>
+      <%= post.post_name %>
+    </h4>
+    <p>
+      <%= post.post_body %>
+    </p>
+    <p>
+      <%= post.created_at %>
+    </p>
+    <%= link_to post.post_name, post %>
+  </li>
+  <% end %>
+</ul>
