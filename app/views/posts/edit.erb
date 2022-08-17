@@ -1,0 +1,40 @@
+<h1>Edit Post</h1>
+
+<div class="mb-3 w-50">
+  <%= form_with class: "row g-3", model: @post, method: :patch do |form| %>
+    <div>
+      <%= form.label :post_name, "Post Title", class: "form-label" %>
+      <%= form.text_field :post_name,
+                          class: "form-control",
+                          required: true,
+                          autocomplete: "off",
+                          placeholder: "Title",
+                          value: "#{@post.post_name}"
+      %>
+      <% @post.errors.full_messages_for(:post_name).each do |msg| %>
+        <p class="text-danger pt-2">
+          <%= msg %>
+        </p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :post_body, "Post Description", class: "form-label" %>
+      <%= form.text_area :post_body,
+                         class: "form-control",
+                         required: true,
+                         placeholder: "Enter text",
+                         style: "height: 120px; resize: none;",
+                         value: "#{@post.post_body}"
+      %>
+      <% @post.errors.full_messages_for(:post_body).each do |msg| %>
+        <p class="text-danger pt-2" ><%= msg %></p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+</div>

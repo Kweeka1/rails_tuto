@@ -11,5 +11,20 @@
       <p>
         <%= @post.created_at %>
       </p>
+      <%= form_with method: :delete, class: "flex-row flex gap-5 w-50" do |form|  %>
+        <%= form.submit "Delete", class: "btn btn-primary"  %>
+        <button type="button" class="btn btn-primary" onclick="window.location.href = '/posts'">Show all</button>
+        <button type="button" class="btn btn-primary" onclick="goToNew_path()" >Create</button>
+        <button type="button" class="btn btn-primary" onclick="goToEdit_path()" >Edit</button>
+      <% end %>
     </li>
 </ul>
+
+<script>
+    function goToNew_path() {
+        return window.location.href = "/posts/new"
+    }
+    function goToEdit_path() {
+        return window.location.href = window.location.href + '/edit'
+    }
+</script>
