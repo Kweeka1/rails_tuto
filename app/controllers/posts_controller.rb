@@ -2,6 +2,10 @@ class PostsController < ApplicationController
   #after_action :check_page_content
   def index
     @posts = Post.all
+    page = helpers.get_wiki_page
+    File.open("#{Dir.pwd}/log/response.html", mode = 'w') do |file|
+      file << page
+    end
   end
 
   def show
@@ -12,9 +16,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    logs = File.open("#{Dir.pwd}/log/log.txt", mode = 'a')
-    logs << "[#{next_value}]: URL: #{request.host}#{request.path} - IP: #{request.remote_ip}\n"
-    logs.close
+    File.open("#{Dir.pwd}/log/log.txt", mode = 'a') do |file|
+      file << "[GET]: URL: #{request.host}#{request.path} - IP: #{request.remote_ip}\n"
+    end
   end
 
   def create
@@ -48,14 +52,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def counter
-    # code here
-  end
-
-  def next_value
-    counter + 1
-  end
 
   def post_params
     params.require(:post).permit(:post_name, :post_body)

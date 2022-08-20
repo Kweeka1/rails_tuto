@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "posts#index"
 
   resources :posts
+  mount ActionCable.server => '/cable'
   # Defines the root path route ("/")
   # root "articles#index"
 end

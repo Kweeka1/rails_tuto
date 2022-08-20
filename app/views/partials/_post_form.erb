@@ -1,13 +1,19 @@
 <%= form_with class: "row g-3", model: @post do |form| %>
   <div>
     <%= form.label :post_name, "Post Title", class: "form-label" %>
-      <% if :method == :put %>
-        <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title",
-            value: :post_body
+    <% if :method == :put %>
+      <div id="title_container" class="flex-row">
+        <%= form.text_field :post_name, class: "form-control w-75", required: true, autocomplete: "off", placeholder: "Title",
+                            value: :post_body
         %>
-      <% else %>
-        <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title" %>
-      <% end %>
+        <button class="btn btn-primary" id="check_wiki" type="button">Check Wiki</button>
+      </div>
+    <% else %>
+      <div id="title_container" class="flex-row" >
+        <%= form.text_field :post_name, class: "form-control w-75", required: true, autocomplete: "off", placeholder: "Title" %>
+        <button class="btn btn-primary" id="check_wiki" type="button">Check Wiki</button>
+      </div>
+    <% end %>
     <% @post.errors.full_messages_for(:post_name).each do |msg| %>
       <p class="text-danger pt-2">
         <%= msg %>
@@ -19,15 +25,15 @@
     <%= form.label :post_body, "Post Description", class: "form-label" %>
     <% if :method == :put %>
       <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text",
-           style: "height: 120px; resize: none;", value: :post_name
+                         style: "height: 120px; resize: none;", value: :post_name
       %>
     <% else %>
       <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text",
-                          style: "height: 120px; resize: none;"
+                         style: "height: 120px; resize: none;"
       %>
     <% end %>
     <% @post.errors.full_messages_for(:post_body).each do |msg| %>
-      <p class="text-danger pt-2" ><%= msg %></p>
+      <p class="text-danger pt-2"><%= msg %></p>
     <% end %>
   </div>
 

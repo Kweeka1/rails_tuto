@@ -8,3 +8,9 @@ body {
     margin: 0;
     padding: 15px;
 }
+
+#title_container {
+    display: flex;
+    height: 40px;
+    gap: 10px;
+}
