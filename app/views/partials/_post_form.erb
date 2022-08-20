@@ -1,7 +1,13 @@
-<%= form_with class: "row g-3", model: @post, method: :post do |form| %>
+<%= form_with class: "row g-3", model: @post do |form| %>
   <div>
     <%= form.label :post_name, "Post Title", class: "form-label" %>
-    <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title" %>
+      <% if :method == :put %>
+        <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title",
+            value: :post_body
+        %>
+      <% else %>
+        <%= form.text_field :post_name, class: "form-control", required: true, autocomplete: "off", placeholder: "Title" %>
+      <% end %>
     <% @post.errors.full_messages_for(:post_name).each do |msg| %>
       <p class="text-danger pt-2">
         <%= msg %>
@@ -11,7 +17,15 @@
 
   <div>
     <%= form.label :post_body, "Post Description", class: "form-label" %>
-    <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text", style: "height: 120px; resize: none;" %>
+    <% if :method == :put %>
+      <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text",
+           style: "height: 120px; resize: none;", value: :post_name
+      %>
+    <% else %>
+      <%= form.text_area :post_body, class: "form-control", required: true, placeholder: "Enter text",
+                          style: "height: 120px; resize: none;"
+      %>
+    <% end %>
     <% @post.errors.full_messages_for(:post_body).each do |msg| %>
       <p class="text-danger pt-2" ><%= msg %></p>
     <% end %>

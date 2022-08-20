@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  # after_action :check_page_content
+  #after_action :check_page_content
   def index
     @posts = Post.all
   end
@@ -13,8 +13,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     logs = File.open("#{Dir.pwd}/log/log.txt", mode = 'a')
-    logs << "[#{:counter}]: URL: #{request.host}#{request.path} - IP: #{request.remote_ip}\n"
-    logs << "#{__dir__}\n"
+    logs << "[#{next_value}]: URL: #{request.host}#{request.path} - IP: #{request.remote_ip}\n"
     logs.close
   end
 
@@ -34,7 +33,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      render 'redirectToHome', status: :ok
+      redirect_to @post
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,7 +49,14 @@ class PostsController < ApplicationController
 
   private
 
-  @counter = 0
+  def counter
+    # code here
+  end
+
+  def next_value
+    counter + 1
+  end
+
   def post_params
     params.require(:post).permit(:post_name, :post_body)
   end

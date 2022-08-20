@@ -12,10 +12,13 @@
         <%= @post.created_at %>
       </p>
       <%= form_with method: :delete, class: "flex-row flex gap-5 w-50" do |form|  %>
-        <%= form.submit "Delete", class: "btn btn-primary"  %>
         <button type="button" class="btn btn-primary" onclick="window.location.href = '/posts'">Show all</button>
-        <button type="button" class="btn btn-primary" onclick="goToNew_path()" >Create</button>
         <button type="button" class="btn btn-primary" onclick="goToEdit_path()" >Edit</button>
+        <%= form.submit "Delete", class: "btn btn-primary", data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        } %>
+        <button type="button" class="btn btn-primary" onclick="goToNew_path()" >Create</button>
       <% end %>
     </li>
 </ul>
