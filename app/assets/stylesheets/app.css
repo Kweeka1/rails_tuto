@@ -14,3 +14,47 @@ body {
     height: 40px;
     gap: 10px;
 }
+
+#chess_container {
+    border: 5px solid #9b9b9b;
+    width: max-content;
+}
+
+#chess_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cube_even {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px !important;
+    height: 70px;
+}
+
+.cube_even:nth-child(even) {
+    background-color: #9eafc7;
+}
+
+.cube_even:nth-child(odd) {
+    background-color: #eff3f1;
+}
+
+.cube_odd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px !important;
+    height: 70px;
+}
+
+.cube_odd:nth-child(even) {
+    background-color: #eff3f1;
+}
+
+.cube_odd:nth-child(odd) {
+    background-color: #9eafc7;
+}

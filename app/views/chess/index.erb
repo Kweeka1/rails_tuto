@@ -1,0 +1,29 @@
+<div id="chess_container">
+  <% @board.each_with_index do |row, row_index| %>
+    <div id="chess_row" class="">
+      <% if (row_index % 2) == 0 %>
+         <% row.each_with_index do |col, col_index| %>
+          <% if col.instance_of? Hash %>
+            <div coordination="<%= row_index %>:<%= col_index %>" piece="<%= col[:piece].split("_")[0] %>" team="<%= col[:team] %>" class="cube_even cube">
+              <%= image_tag "#{col[:piece]}.png", width: '50px', alt: "#{col[:piece]}" %>
+            </div>
+            <% else %>
+            <div coordination="<%= row_index %>:<%= col_index %>" piece="" team="" class="cube_even cube"><%= col %></div>
+            <% end %>
+          <% end %>
+        <% else %>
+        <% row.each_with_index do |col, col_index| %>
+          <% if col.instance_of? Hash %>
+            <div coordination="<%= row_index %>:<%= col_index %>" piece="<%= col[:piece].split("_")[0] %>" team="<%= col[:team] %>" class="cube_odd cube">
+              <%= image_tag "#{col[:piece]}.png", width: '50px', alt: "#{col[:piece]}" %>
+            </div>
+          <% else %>
+            <div coordination="<%= row_index %>:<%= col_index %>" piece="" team="" class="cube_odd cube"><%= col %></div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= javascript_include_tag 'chess' %>
