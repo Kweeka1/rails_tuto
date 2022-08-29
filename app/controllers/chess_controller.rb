@@ -1,9 +1,9 @@
 class ChessController < ApplicationController
   def index
     @board = $arr
-    File.open("#{Dir.pwd}/log/chess.txt", mode: 'w') do |file|
-      file << @board[1][0][:piece]
-    end
+    # File.open("#{Dir.pwd}/log/chess.txt", mode: 'w') do |file|
+    #   file << @board[1][0][:piece]
+    # end
   end
 
   private
@@ -23,12 +23,13 @@ class ChessController < ApplicationController
   RPn = { "piece": 'Pawn_white', team: 'Red' }.freeze
 
   $arr = Array.new 8, Array.new(8, '  ')
+  backline = [BRk, BKn, BBi, BKi, BQn, BBi, BKn, BRk]
+  bishop = ["", "", "", BKn, "", "", "", ""]
+  $arr[0] = bishop
+  #$arr[1] = Array.new 8, BPn
 
-  $arr[0] = [BRk, BKn, BBi, BKi, BQn, BBi, BKn, BRk]
-  $arr[1] = Array.new 8, BPn
-
-  $arr[6] = Array.new 8, RPn
-  $arr[7] = [RRk, RKn, RBi, RKi, RQn, RBi, RKn, RRk]
+  # $arr[6] = Array.new 8, RPn
+  # $arr[7] = [RRk, RKn, RBi, RKi, RQn, RBi, RKn, RRk]
 
   TABLE = {
     A: '0',

@@ -1,3 +1,6 @@
+<%= action_cable_meta_tag %>
+<%= javascript_include_tag "chess_channel", defer: true %>
+
 <div id="chess_container">
   <% @board.each_with_index do |row, row_index| %>
     <div id="chess_row" class="">

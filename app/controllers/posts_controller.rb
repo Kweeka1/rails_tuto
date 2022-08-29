@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     page = helpers.get_wiki_page
-    File.open("#{Dir.pwd}/log/response.html", mode = 'w') do |file|
+    File.open("#{Dir.pwd}/log/response.html", mode: 'w') do |file|
       file << page
     end
   end
