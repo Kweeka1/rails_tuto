@@ -24,7 +24,7 @@ class ChessController < ApplicationController
 
   $arr = Array.new 8, Array.new(8, '  ')
   backline = [BRk, BKn, BBi, BKi, BQn, BBi, BKn, BRk]
-  bishop = ["", "", "", BKn, "", "", "", ""]
+  bishop = ["", "", "", BKi, "", "", "", ""]
   $arr[0] = bishop
   #$arr[1] = Array.new 8, BPn
 

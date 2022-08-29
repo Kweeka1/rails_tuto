@@ -36,10 +36,9 @@ function getBishopMoves(startingPosition, territories, turn) {
     const startingRowPos = parseInt(startingPosition[0])
     const startingColPos = parseInt(startingPosition[1])
 
-    function isPossibleMove(row, i, turn) {
+    function isPossibleMove(row, i) {
         const territory = territories[(row * 8) + i]
         if (territory !== undefined && territory?.getAttribute("team") !== turn) {
-            console.log(territory.getAttribute("team"))
             territory.style.border = "2px solid green"
             possibleMoves.push((row * 8) + i)
             return territory.getAttribute("team") !== "Red"
@@ -52,12 +51,12 @@ function getBishopMoves(startingPosition, territories, turn) {
         let row = startingRowPos
         for (let i = startingColPos - 1; i >= 0; i--) {
             row--
-            if (!isPossibleMove(row, i, turn)) break;
+            if (!isPossibleMove(row, i)) break;
         }
         row = startingRowPos
         for (let i = startingColPos + 1; i <= 7; i++) {
             row--
-            if (!isPossibleMove(row, i, turn)) break;
+            if (!isPossibleMove(row, i)) break;
         }
     }
 
@@ -65,17 +64,59 @@ function getBishopMoves(startingPosition, territories, turn) {
         let row = startingRowPos
         for (let i = startingColPos - 1; i >= 0; i--) {
             row++
-            if (!isPossibleMove(row, i, turn)) break;
+            if (!isPossibleMove(row, i)) break;
         }
         row = startingRowPos
         for (let i = startingColPos + 1; i <= 7; i++) {
             row++
-            if (!isPossibleMove(row, i, turn)) break;
+            if (!isPossibleMove(row, i)) break;
         }
     }
 
     getDownMoves()
     getUpMoves()
+}
+
+function getRockMoves(startingPosition, territories, turn) {
+    const startingRowPos = parseInt(startingPosition[0])
+    const startingColPos = parseInt(startingPosition[1])
+
+    function isPossibleMove(row, col) {
+        const territory = territories[(row * 8) + col]
+        if (territory !== undefined && territory?.getAttribute("team") !== turn) {
+            territory.style.border = "2px solid green"
+            possibleMoves.push((row * 8) + col)
+            return territory.getAttribute("team") !== "Red"
+        }
+
+        return false
+    }
+
+    function getHorizontalMoves() {
+        for (let col = startingColPos - 1; col >= 0; col--) {
+            if (!isPossibleMove(startingRowPos, col)) break;
+        }
+        for (let col = startingColPos + 1; col <= 7; col++) {
+            if (!isPossibleMove(startingRowPos, col)) break;
+        }
+    }
+
+    function getVerticalMoves() {
+        for (let row = startingRowPos - 1; row >= 0; row--) {
+            if (!isPossibleMove(row, startingColPos)) break;
+        }
+        for (let row = startingRowPos + 1; row <= 7; row++) {
+            if (!isPossibleMove(row, startingColPos)) break;
+        }
+    }
+
+    getHorizontalMoves()
+    getVerticalMoves()
+}
+
+function getKingMoves(startingPosition, territories, turn) {
+    getRockMoves(startingPosition, territories, turn)
+    getBishopMoves(startingPosition, territories, turn)
 }
 
 export function clearPossibleMoves(territories) {
@@ -93,6 +134,10 @@ export function getPossibleMoves(currentPiece, lastPieceSelected, territories, t
             return getKnightMoves(startingPosition, territories, turn)
         case "Bishop":
             return getBishopMoves(startingPosition, territories, turn)
+        case "Rock":
+            return getRockMoves(startingPosition, territories, turn)
+        case "King":
+            return getKingMoves(startingPosition, territories, turn)
         default:
             return []
     }

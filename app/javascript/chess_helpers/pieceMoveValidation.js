@@ -98,7 +98,7 @@ function validateRockMove(startingPosition, endPosition, territories) {
 
 function validateKingMove(startingPosition, endPosition, territories) {
     if (startingPosition[0] === endPosition[0] || startingPosition[1] === endPosition[1])
-        return validateRockMove(startingPosition, endPosition)
+        return validateRockMove(startingPosition, endPosition, territories)
 
     else return validateBishopMove(startingPosition, endPosition, territories)
 }
